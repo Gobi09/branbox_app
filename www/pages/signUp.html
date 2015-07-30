@@ -1,0 +1,91 @@
+<ion-view title="Sign Up">
+      <ion-content>
+       	<div class="responsive-sm"> 
+	       	<form name="myForm" ng-controller="saveUserData" ng-submit="addUserData()" name="personForm">
+	       	<ul class="padding">
+	       		<li class="item-input item-stacked-label">
+				    <span class="light">Email</span>
+				    <label class="item-input-wrapper">
+				    <input ng-model="email" type="email" placeholder="Email"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">First Name</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="firstName" placeholder="First Name"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Last Name</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="lastName" placeholder="Last Name"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Password</span>
+				    <label class="item-input-wrapper">
+				    <input type="password" ng-model="password" placeholder="Password"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Confirm Password</span>
+				    <label class="item-input-wrapper">
+				    <input type="password" ng-model="confirmPassword" placeholder="Confirm Password"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">DOB</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="dob" placeholder="yyyy/mm/dd"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Gender</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="gender" placeholder="Gender"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Telephone Number</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="telephoneNo" placeholder="Telephone"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Mobile Number</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="mobleNo" placeholder="Mobile Number"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Address 1</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="address1" placeholder="Address 1"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Address 2</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="address2" placeholder="Address 2"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">City</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="city" placeholder="City"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">State</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="State" placeholder="State"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Country</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="country" placeholder="Country"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Post Code</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" ng-model="postCode" placeholder="Post Code"></label>
+				</li>
+				<li class="item-input-inset item-input">
+				    <button class="button button-assertive button-small item-input-wrapper">REGISTER</button>
+				</li>
+				<li class="right">
+				    <a class="button button-clear button-small size-12" style="padding-top:20px">&nbsp;</a>
+				</li>
+			</ul>
+			<div class="loading-div"><img ng-src="{{loaderImages.src}}"></div>
+		</div>
+	</ion-content>
+ </ion-view>

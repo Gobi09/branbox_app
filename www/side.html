@@ -1,0 +1,55 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.css" />
+  <script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.js"></script>
+  <script>
+    var app = angular.module('ionicApp', ['ionic'])
+
+    app.config(function($stateProvider, $urlRouterProvider) {
+      $urlRouterProvider.otherwise('/')
+
+      $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'home.html'
+      })
+      .state('detail', {
+        url: '/',
+        templateUrl: 'detail.html'
+      })
+    })
+  </script>
+</head>
+
+<body ng-app="ionicApp">
+  <ion-nav-bar class="bar-energized nav-title-slide-ios7">
+    <ion-nav-back-button class="button-clear">
+      <i class="ion-arrow-left-c"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-nav-view></ion-nav-view>
+
+  <script id='home.html' type='text/ng-template'>
+    <ion-view title="Our Awesome Header">
+      <ion-content>
+        <p>Here's the content for this page</p>
+        <a ui-sref="detail">Detail Page</a>
+      </ion-content>
+    </ion-view>
+  </script>
+
+    <script id='detail.html' type='text/ng-template'>
+    <ion-view title="Detail Page">
+      <ion-content>
+        Here's a detail page
+      </ion-content>
+    </ion-view>
+  </script>
+</body>
+
+</html>
+

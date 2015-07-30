@@ -1,0 +1,47 @@
+<ion-view title="Contact Us">
+      <ion-content>
+      	<div class="responsive-sm"> 
+	       	<ul class="padding">
+	       		<li class="item-input item-stacked-label">
+				    <span class="light">Name</span>
+				    <label class="item-input-wrapper">
+				    <input type="text" id="firstName" placeholder="Name"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">E-Mail</span>
+				    <label class="item-input-wrapper">
+				    <input id="email" type="email" placeholder="Email"></label>
+				</li>
+				<li class="item-input item-stacked-label">
+					<span class="light">Messages</span>
+				    <label class="item-input-wrapper">
+				    <textarea style="height: 70px;" placeholder="Comments"></textarea></label>
+				</li>
+				<li class="item-input item-stacked-label">
+				    <button class="button red-d4  item-input-wrapper buttonMinHeight">Send</button>
+				</li>
+			</ul>
+			<div class="row light"><span class="contactUsRAdd">Restaurant Address</span></div>
+			<div class="row light" ng-controller="contactUs" ng-init="contactUs()">
+				<div class="col">
+					<div ng-bind-html="name"></div>
+					<div ng-bind-html="companyName"></div>
+					<div ng-bind-html="address1"></div>
+					<div ng-bind-html="address2"></div>
+					<div ng-bind-html="city"></div>
+					<div ng-bind-html="state"></div>
+					<div ng-bind-html="country"></div>
+					<div ng-bind-html="postalCode"></div>
+					<div ng-bind-html="phoneNumber"></div>
+					<div ng-bind-html="email"></div>
+					<div ng-bind-html="website"></div>
+				</div>
+  			<div class="col" ng-controller="contactUsMap" ng-init="initialize()">
+    			<div id="map" data-tap-disabled="false"></div>
+  			</div>
+  			</div>
+			
+			</div>
+			<div class="row light">&nbsp;</div>
+      </ion-content>
+  </ion-view>

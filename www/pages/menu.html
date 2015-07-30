@@ -1,0 +1,27 @@
+<ion-view>
+      <ion-content ng-controller="menu ">
+        <div class="list list-inset ">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <label class="item-input-wrapper">
+           <input id="searchKey" type="search" placeholder="Search" ng-model="menu" >
+            
+          </label>
+            <!--  -->
+          </label>
+        </div>
+        <div ng-repeat="menu in Menus | filter:menu"> 
+            <div>
+            <div class="list text-center " >
+              <a class="item item-trns" href="#/menu/={{menu.id}}">
+                <h2>{{menu.name}}</h2>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="item item-trns" >
+                  &nbsp;
+                </div>
+
+      </ion-content>
+  </ion-view>

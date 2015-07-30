@@ -1,0 +1,16 @@
+<ion-view title="Bran | About Us">
+    <ion-content ng-controller="aboutUs" class="light" ng-init="dbAboutUs()">
+        <div class="row responsive-lg light"> 
+            <div class="col col-20 Bwhite">
+                <img ng-src="{{firstImages.src}}" width="100%" >
+            </div>
+        </div>
+         <div class="row responsive-lg light"> 
+            <div class="col col-20">
+                <div ng-bind-html="title"></div>
+                <div ng-bind-html="description"></div>
+            </div>
+        </div>
+        <div class="row">&nbsp;</div>
+    </ion-content>
+</ion-view>

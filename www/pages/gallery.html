@@ -1,0 +1,14 @@
+<ion-view title="BranBox">
+    <ion-content ng-controller="IntroCtrl">
+   	    <div id="img">
+        	<ion-scroll>
+        	   <div class="col col-33" ng-repeat="image in allImages" ng-src="{{image.src}}"  ng-click="openModal()">
+                    <div class="card">
+                        <img ng-src="{{image.src}}" width="100%"/>
+                    </div>
+                </div>
+    </ion-scroll>
+                <iframe src="video/demo.mp4" ></iframe>
+            </div>
+	</ion-content>
+</ion-view>

@@ -1,0 +1,14 @@
+<ion-view title="Bran | LatestOffer">
+    <ion-content ng-controller="latestOffer" ng-init="latestOffer()">
+        <div class="row responsive-lg light" ng-repeat="rowData in dbdata"> 
+            <div class="col col-20 Bwhite card">
+            	<div class="imageSmall">
+                	<img ng-src="{{specialOffer.src}}" width="100%"  class="responsiveimage"/>
+                </div>
+                <img ng-src="{{rowData.image}}" width="100%" class="offerImage"/>
+                <span class="badge badge-assertive floatleft">{{rowData.Description}}<br/>Price: 250 AED</span>
+                <button class="button button-stable floatright buttonMinHeight"><span class="ion-android-cart" style="color:#F05A46"></span> Add to Cart</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

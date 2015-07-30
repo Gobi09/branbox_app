@@ -1,0 +1,47 @@
+<ion-view>
+  	<ion-content ng-controller="subMenuItem">
+      	<div class="list list-inset">
+          <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <label class="item-input-wrapper">
+              <input id="searchKey" type="search" placeholder="Search" ng-model="item" >
+            </label>
+          </label>
+        </div>
+
+      	<div   ng-repeat="item in SubMenuItem | filter:item"> 
+            <div>
+            <div class="list" >
+              <div class="item item-trns odd" ng-init="price = item.price">
+              <!-- <a class="item item-trns" href="#/item/={{item.menuId}}={{item.subMenuId}}={{item.id}}"> -->
+                <h2><span>ITEM: {{item.name}}:</span><span class="right">Price:<span id="price{{$index}}"  ng-model="price">{{price}} </span> AED</span> <input type="hidden" class="price{{$index}}" value="{{item.price}}"></h2> 
+                Quantity:<br><br>
+                <div class="button-bar">
+                  <button class="button" ng-click='minus($event,$index,item);' id="minus" value="1" ><img src="img/minus.png" style="width:70%"  >
+                    </button>
+                  <input type="button"  value="1" name="quantity{{$index}}" ng-model="quantity" class="button quantity1" id="quantity{{$index}}">
+                  <button class="button" ng-click='plus($event,$index,item);' id="plus" value="1"> 
+                    <img src="img/plus.png" style="width:70%"> 
+                  </button>
+                  <button class="button text-center icon-left ion-ios-cart" value="1" id="addtocart{{$index}}" ng-click="addToCart($event,item);" > 
+                  </button>
+
+                  <a class="button text-center ion-information button-assertive" href="#/item/={{item.menuId}}={{item.subMenuId}}={{item.id}}"  ><!-- <img src="img/More-Info.jpg" style="width:100%"> --> </a>
+                  <!-- <button class="button ion-chevron-right" value="More" > 
+                  </button> -->
+                </div>
+              <!-- </a> -->
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="item item-trns" >
+                  &nbsp;
+                </div>
+                <div class="item item-trns" >
+                  &nbsp;
+                </div>
+      	
+  	</ion-content>
+</ion-view>
+
