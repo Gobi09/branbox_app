@@ -3,13 +3,40 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var apps=angular.module('starter', ['ionic','starter.toggleCtrl','starter.services']);
+var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','starter.services'])
 // var parameters = window.location.href;
 //       var temp = parameters.split("=");
 //       var SubMenuMenuName= unescape(temp[1]);
 //       alert(SubMenuMenuName);
 
+.run(function($ionicPlatform, $cordovaSQLite) {
+        $ionicPlatform.ready(function() {
+        
 
+        // Important!!
+        // 
+        // Instantiate database file/connection after ionic platform is ready.
+        // 
+        db = $cordovaSQLite.openDB("nextflow.db");
+        $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
+        .then(function(result) {
+                alert("table created successfully");
+                  $scope.statusMessage = "Message saved successful, cheers!";
+              }, function(error) {
+                  $scope.statusMessage = "Error on saving: " + error.message;
+              });
+          // alert("inside a creation");
+          $cordovaSQLite.execute(db, 'INSERT INTO Messages (message) VALUES (?)', "newMessage")
+              .then(function(result) {
+                alert("insert successfully");
+                  $scope.statusMessage = "Message saved successful, cheers!";
+              }, function(error) {
+                  $scope.statusMessage = "Error on saving: " + error.message;
+              });
+
+
+    });
+  });
       
 // apps.run(function($ionicPlatform, $cordovaSQLite) {
 //         $ionicPlatform.ready(function() {

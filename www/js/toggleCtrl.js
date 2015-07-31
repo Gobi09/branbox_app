@@ -137,7 +137,7 @@ angular.module('starter.toggleCtrl', [
   })
 
 //item page
-.controller('subMenuItem', function($scope,$http,$location) {
+.controller('subMenuItem', function($scope,$http,$location,$cordovaSQLite) {
 
     var url = $location.url();
     var temp = url.split("=");
@@ -158,34 +158,12 @@ angular.module('starter.toggleCtrl', [
          //alert(urlString);
   $http.post(urlString).success(function(json){
     $scope.SubMenuItem=json.rows;
-      var ajaxlength = json.rows.length;
-      // console.log($scope.SubMenuItem);
-      // alert(ajaxlength);
-      // var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
-      // db.transaction(function(tx){
-      // tx.executeSql('CREATE TABLE IF NOT EXISTS menu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER , menuId INTEGER, subMenuId INTEGER,itemName TEXT, image TEXT, position TEXT, status TEXT, online TEXT) ');
-      // for (var i = 0; i < ajaxlength; i++)
-      //   {
-      //       tx.executeSql('INSERT OR REPLACE INTO menu (itemId, businessId,menuId,subMenuId,itemName,image, position, status , online)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].menuId+'","'+json.rows[i].subMenuId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
-      //       j++;
-      //       if(j==ajaxlength)
-      //       {
-      //           alert('All Menu datas are updated');
-      //       }
-      //   }
-
-
-                              
-      // });
-
-
-    console.log($scope.SubMenuItem);
-
+      
 
     }).error(function(){
       alert("Server Error");
     });
-    
+
    // function successID(){
    //  alert("data");
    //      return true;
