@@ -34,6 +34,8 @@ var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','st
                   $scope.statusMessage = "Error on saving: " + error.message;
               });
 
+              
+        alert(db);
 
     });
   });
