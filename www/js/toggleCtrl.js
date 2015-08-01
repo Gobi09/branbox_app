@@ -95,18 +95,25 @@ angular.module('starter.toggleCtrl', [
             }
         });
     }).error(function(){
-      tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
-            var itemLength = results.rows.length;
-            var menudatas=results.rows;
-            for(var i = 0; i < itemLength; i++) {
-                var row = menudatas.item(i);
-                var obj = {businessId: row.businessId,id:row.id,image:row.image,menuName:row.menuName,online:row.online,position:row.position,status:row.status,createdTime:row.createdTime};
-                json_arr.push(obj);
-            }  
-          $scope.Menus=json_arr;
-          console.log( $scope.Menus);
-          });
-    });
+       var json_arr =  [];  
+        var businessId='1';
+          alert("local");
+           var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+            db.transaction(function(tx){
+            tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
+                var itemLength = results.rows.length;
+                var menudatas=results.rows;
+                alert(itemLength);
+                for(var i = 0; i < itemLength; i++) {
+                    var row = menudatas.item(i);
+                    var obj = {businessId: row.businessId,id:row.id,image:row.image,menuName:row.menuName,online:row.online,position:row.position,status:row.status,createdTime:row.createdTime};
+                    json_arr.push(obj);
+                }  
+              $scope.Menus=json_arr;
+              console.log( $scope.Menus);
+              });
+        });
+     });
   })
 
 
