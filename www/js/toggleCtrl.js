@@ -97,13 +97,13 @@ angular.module('starter.toggleCtrl', [
     }).error(function(){
        var json_arr =  [];  
         var businessId='1';
-          alert("local");
+          //alert("local");
            var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
             db.transaction(function(tx){
             tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
                 var itemLength = results.rows.length;
                 var menudatas=results.rows;
-                alert(itemLength);
+                //alert(itemLength);
                 for(var i = 0; i < itemLength; i++) {
                     var row = menudatas.item(i);
                     var obj = {businessId: row.businessId,id:row.id,image:row.image,menuName:row.menuName,online:row.online,position:row.position,status:row.status,createdTime:row.createdTime};
@@ -120,16 +120,66 @@ angular.module('starter.toggleCtrl', [
 //Sub Menu Controller
 .controller('subMenu', function($scope,$http,$location) {
 
-         var url = $location.url();
-         var temp = url.split("=");
-        var urlString="http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenuWithItem.php?menuId="+temp[1];
-        
+    var url = $location.url();
+    var temp = url.split("=");
+    var getMenuId=temp[1];
+    var urlString="http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenuWithItem.php";
+       
          //alert(urlString);
-  $http.post(urlString).success(function(data){
-    $scope.SubMenu=data.rows;
+  $http.post(urlString).success(function(json){
+
+
+     var json_arr =  [];  
+        var businessId='1';
+        var ajaxlength = json.rows.length;
+        var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+        db.transaction(function(tx){
+         tx.executeSql('CREATE TABLE IF NOT EXISTS submenu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER ,menuId INTEGER,subMenuName TEXT, image TEXT,position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+          for (var i = 0; i < ajaxlength; i++)
+          {
+              tx.executeSql('INSERT OR REPLACE INTO submenu (id,businessId,menuId,subMenuName,image,position,status,online,createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].menuId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
+          }
+           tx.executeSql('SELECT * FROM submenu where status="ON" and businessId = "'+businessId+'" and menuId= "'+getMenuId+'"',[], function (tx, results) {
+            var itemLength = results.rows.length;
+            var menudatas=results.rows;
+            //alert(itemLength);
+              //alert(results.rows.item(0).subMenuName);
+            for(var i = 0; i < itemLength; i++) {
+                var row = menudatas.item(i);
+                var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuName:row.subMenuName,image:row.image,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
+                json_arr.push(obj);
+            }  
+          $scope.SubMenu=json_arr;
+          console.log( $scope.SubMenu);
+          });
+            function successID(){
+                return true;
+            }
+        });
+
+
+    //$scope.SubMenu=data.rows;
     console.log($scope.SubMenu);
     }).error(function(){
-      alert("Server Error");
+       var json_arr =  [];  
+        var businessId='1';
+          //alert("local");
+           var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+            db.transaction(function(tx){
+            tx.executeSql('SELECT * FROM submenu where status="ON" and businessId = "'+businessId+'" and menuId= "'+getMenuId+'"',[], function (tx, results) {
+            var itemLength = results.rows.length;
+            var menudatas=results.rows;
+            //alert(itemLength);
+              //alert(results.rows.item(0).subMenuName);
+            for(var i = 0; i < itemLength; i++) {
+                var row = menudatas.item(i);
+                var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuName:row.subMenuName,image:row.image,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
+                json_arr.push(obj);
+            }  
+          $scope.SubMenu=json_arr;
+          console.log( $scope.SubMenu);
+          });
+        });
     });
 
 
@@ -185,10 +235,14 @@ angular.module('starter.toggleCtrl', [
 
     var url = $location.url();
     var temp = url.split("=");
-
-    var urlString="http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php?menuId="+temp[1]+"&subMenuId="+temp[2];
+    var menuId=temp[1];
+    var subMenuId=temp[2];
+    var tempDataForCatr =  [];  
+    var urlString="http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php";
     $scope.OrderedItem="";
     //$scope.tempDataForCatr="";
+     
+
      $scope.tempDataForCatr=[{name:"",
             subMenuid:"",
             menuId:"",
@@ -201,17 +255,60 @@ angular.module('starter.toggleCtrl', [
 
          //alert(urlString);
   $http.post(urlString).success(function(json){
-    $scope.SubMenuItem=json.rows;
-      
+    var json_arr =  [];  
+        var businessId='1';
+        var ajaxlength = json.rows.length;
+        var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+        db.transaction(function(tx){
+         tx.executeSql('CREATE TABLE IF NOT EXISTS item ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER ,menuId INTEGER, subMenuId INTEGER, itemName TEXT, image TEXT, price TEXT, garnish TEXT,tax TEXT,offers TEXT, position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+          for (var i = 0; i < ajaxlength; i++)
+          {
+              tx.executeSql('INSERT OR REPLACE INTO item (id,businessId,menuId,subMenuId,itemName,image,price,garnish,tax,offers,position,status,online,createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].menuId+'","'+json.rows[i].subMenuId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].price+'","'+json.rows[i].garnish+'","'+json.rows[i].tax+'","'+json.rows[i].offers+'","'+json.rows[i].positions+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
+          }
+           tx.executeSql('SELECT * FROM item where status="ON" and businessId = "'+businessId+'" and subMenuId= "'+subMenuId+'" and menuId= "'+menuId+'"',[], function (tx, results)
+          {
+            var itemLength = results.rows.length;
+            var menudatas=results.rows;
+            //alert(itemLength);
+              //alert(results.rows.item(0).subMenuName);
+            for(var i = 0; i < itemLength; i++) {
+                var row = menudatas.item(i);
+                var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemName:row.itemName,image:row.image,price:row.price,garnish:row.garnish,tax:row.tax,offers:row.offers,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
+                json_arr.push(obj);
+            }  
+          $scope.SubMenuItem=json_arr;
+          console.log( $scope.SubMenu);
+          });
+            
+        });
+
 
     }).error(function(){
-      alert("Server Error");
-    });
 
-   // function successID(){
-   //  alert("data");
-   //      return true;
-   //  }
+       var json_arr =  [];  
+        var businessId='1';
+          //alert("local");
+           var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+            db.transaction(function(tx){
+            tx.executeSql('SELECT * FROM item where status="ON" and businessId = "'+businessId+'" and subMenuId= "'+subMenuId+'" and menuId= "'+menuId+'"',[], function (tx, results)
+          {
+            var itemLength = results.rows.length;
+            var menudatas=results.rows;
+            //alert(itemLength);
+              //alert(results.rows.item(0).subMenuName);
+            for(var i = 0; i < itemLength; i++) {
+                var row = menudatas.item(i);
+                var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemName:row.itemName,image:row.image,price:row.price,garnish:row.garnish,tax:row.tax,offers:row.offers,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
+                json_arr.push(obj);
+            }  
+          $scope.SubMenuItem=json_arr;
+          console.log( $scope.SubMenu);
+          });
+        });
+    });
+function successID(){
+                return true;
+            }
     $scope.minus=function(val,index,item)
     {
        

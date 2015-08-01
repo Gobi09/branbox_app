@@ -14,7 +14,7 @@
             <div class="list" >
               <div class="item item-trns odd" ng-init="price = item.price">
               <!-- <a class="item item-trns" href="#/item/={{item.menuId}}={{item.subMenuId}}={{item.id}}"> -->
-                <h2><span>ITEM: {{item.name}}:</span><span class="right">Price:<span id="price{{$index}}"  ng-model="price">{{price}} </span> AED</span> <input type="hidden" class="price{{$index}}" value="{{item.price}}"></h2> 
+                <h2><span>ITEM: {{item.itemName}}:</span><span class="right">Price:<span id="price{{$index}}"  ng-model="price">{{price}} </span> AED</span> <input type="hidden" class="price{{$index}}" value="{{item.price}}"></h2> 
                 Quantity:<br><br>
                 <div class="button-bar">
                   <button class="button" ng-click='minus($event,$index,item);' id="minus" value="1" ><img src="img/minus.png" style="width:70%"  >
