@@ -33,34 +33,7 @@ var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','st
         //       }, function(error) {
         //           $scope.statusMessage = "Error on saving: " + error.message;
         //       });
- alert("itemLength");
-       var j=1;
-      var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
-      
-                        db.transaction(function(tx){
-                              
-                              
-        tx.executeSql('CREATE TABLE IF NOT EXISTS submenu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER) ');
-        
-        for (var i = 0; i < 5; i++)
-        {
-            tx.executeSql('INSERT OR REPLACE INTO submenu (id,businessId)VALUES ("'+i+'","'+j+'")',successID);
-            j++;
-           
-        }
-        
-        
-        tx.executeSql('SELECT * FROM submenu',[], function (tx, results) {
-          var itemLength = results.rows.length;
-          
-          alert(itemLength);
-          alert(results.rows.item(0).businessId);
-  });
-    
-            function successID(){
-                return true;
-            }
-        });
+
               
         //alert(db);
 

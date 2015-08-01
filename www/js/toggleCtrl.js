@@ -65,7 +65,35 @@ angular.module('starter.toggleCtrl', [
 //Menu Controller
 .controller('menu', function($scope,$http) {
 
-    $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php').success(function(data){
+    $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php').success(function(json){
+        var j=0;
+         var businessId='1';
+       var ajaxlength = json.rows.length;
+       alert(ajaxlength+"length of the post");
+      var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+      db.transaction(function(tx){
+       tx.executeSql('CREATE TABLE IF NOT EXISTS menu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER , menuName TEXT, image TEXT, position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+        for (var i = 0; i < ajaxlength; i++)
+        {
+            tx.executeSql('INSERT OR REPLACE INTO menu (id, businessId, menuName,image, position, status , online, createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
+            j++;
+            if(j==ajaxlength)
+            {
+                alert('All Menu datas are updated');
+            }
+        }
+         tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
+          var itemLength = results.rows.length;
+          $scope.Menus=results;
+          alert(results);
+          alert(results.rows.item(0).businessId);
+        });
+    
+            function successID(){
+                return true;
+            }
+        });
+
     $scope.Menus=data.rows;
     }).error(function(){
       alert("Server Error");
