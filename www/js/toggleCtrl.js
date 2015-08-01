@@ -87,7 +87,7 @@ angular.module('starter.toggleCtrl', [
         }
          tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
           var itemLength = results.rows.length;
-          $scope.Menus=results.rows;
+          $scope.Menus=results.rows.item;
           alert(itemLength+"Length of the stored item");
           for (var i = 0; i < itemLength; i++)
         {
