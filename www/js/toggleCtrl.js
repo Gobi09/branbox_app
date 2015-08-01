@@ -91,7 +91,7 @@ angular.module('starter.toggleCtrl', [
           alert(itemLength+"Length of the stored item");
           for (var i = 0; i < itemLength; i++)
         {
-          alert(results.rows.item(i).image);
+          alert(results.rows.item(i).menuName);
         }
         });
     
