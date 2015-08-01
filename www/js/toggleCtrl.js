@@ -241,17 +241,7 @@ angular.module('starter.toggleCtrl', [
     var urlString="http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php";
     $scope.OrderedItem="";
     //$scope.tempDataForCatr="";
-     
-
-     $scope.tempDataForCatr=[{name:"",
-            subMenuid:"",
-            menuId:"",
-            itemId:"",
-            price:"",
-            image:"",
-            quantity:"",
-            subTotal: ""
-          }]; 
+    $scope.tempDataForCatr=[]; 
 
          //alert(urlString);
   $http.post(urlString).success(function(json){
@@ -275,16 +265,20 @@ angular.module('starter.toggleCtrl', [
                 var row = menudatas.item(i);
                 var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuId:row.subMenuId,itemName:row.itemName,image:row.image,price:row.price,garnish:row.garnish,tax:row.tax,offers:row.offers,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
                 json_arr.push(obj);
-            }  
+            }
           $scope.SubMenuItem=json_arr;
-          console.log( $scope.SubMenu);
+          console.log( $scope.SubMenuItem);
           });
             
+            function successID(){
+                return true;
+            }
+
         });
 
 
     }).error(function(){
-
+       $scope.tempDataForCatr=[]; 
        var json_arr =  [];  
         var businessId='1';
           //alert("local");
@@ -302,13 +296,11 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }  
           $scope.SubMenuItem=json_arr;
-          console.log( $scope.SubMenu);
+          console.log( $scope.SubMenuItem);
           });
         });
     });
-function successID(){
-                return true;
-            }
+
     $scope.minus=function(val,index,item)
     {
        
