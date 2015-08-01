@@ -85,8 +85,8 @@ angular.module('starter.toggleCtrl', [
          tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
           var itemLength = results.rows.length;
           $scope.Menus=results.rows;
-          alert(results.rows.item);
-          alert(results.rows.item(0).businessId);
+          alert(itemLength+"Length of the stored item");
+          alert(results.rows.item(0).name);
         });
     
             function successID(){
@@ -94,7 +94,7 @@ angular.module('starter.toggleCtrl', [
             }
         });
 
-    //$scope.Menus=data.rows;
+    $scope.Menus=json.rows;
     }).error(function(){
       alert("Server Error");
     });
