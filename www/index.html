@@ -115,86 +115,28 @@
         $(document).ready(function(){
            
        alert("itemLength");
-            var businessId='1';
-            //alert(businessId);
-          
-            $.ajax({
-    type: "POST",
-                dataType:"json",
-    url: 'http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php',
-                contentType: "application/json",
-             
-    data :  'businessId='+businessId,
-                success:function (json)
-                {
-                  alert("json reserved");
-                  console.log(json);
-                  alert(json.rows[i].menuId);
-                    var ajaxlength = json.rows.length;
-                    //alert(ajaxlength);
-      var j=0;
+       var j=1;
       var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
       
                         db.transaction(function(tx){
                               
                               
-        tx.executeSql('CREATE TABLE IF NOT EXISTS submenu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER ,menuId INTEGER,subMenuName TEXT, image TEXT,position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+        tx.executeSql('CREATE TABLE IF NOT EXISTS submenu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER) ');
         
-                                for (var i = 0; i < ajaxlength; i++)
+        for (var i = 0; i < 5; i++)
         {
-            tx.executeSql('INSERT OR REPLACE INTO submenu (id,businessId,menuId,subMenuName,image,position,status,online,createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].menuId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
+            tx.executeSql('INSERT OR REPLACE INTO submenu (id,businessId)VALUES ("'+i+'","'+j+'")',successID);
             j++;
-            if(j==ajaxlength)
-            {
-          $(".msg_body").hide();
-                //alert('All sub menus datas are updated');
-            }
+           
         }
         
         
-        tx.executeSql('SELECT * FROM submenu where status="ON" and businessId = "'+businessId+'" and menuId= "'+getMenuId+'"',[], function (tx, results) {
+        tx.executeSql('SELECT * FROM submenu',[], function (tx, results) {
           var itemLength = results.rows.length;
-          //alert("suceess query");
+          
           alert(itemLength);
-          // for (var i=0; i<itemLength; i++)
-          // {
-          //     var len = results.rows.length;
-          //     $( "#menu1").append("<h3 class='msg_head' ><a href='subMenuItem.html?name="+results.rows.item(i).subMenuName+"&id="+results.rows.item(i).id+"&maenuId="+results.rows.item(i).menuId+" '>"+results.rows.item(i).subMenuName+" </h3>" );
-          // }
-          
-           
-        });
-                              
-      });
-      
-      
-      
-    },
-                error: function(xhr, status, error)
-                {
-        var db = window.openDatabase("branbox", "1.0", "branbox Demo", 100 * 1024 * 1024);
-        db.transaction(function (tx){
-        
-          tx.executeSql('SELECT * FROM submenu where status="ON" and businessId = "'+businessId+'" and menuId= "'+getMenuId+'"',[], function (tx, results) {
-            var itemLength = results.rows.length;
-            alert("suceess query");
-            alert(itemLength);
-          //   for (var i=0; i<itemLength; i++)
-          //   {
-          // var len = results.rows.length;
-          // $( "#menu1").append("<h3 class='msg_head' ><a href='subMenuItem.html?name="+results.rows.item(i).subMenuName+"&id="+results.rows.item(i).id+"'>"+results.rows.item(i).subMenuName+" </h3>" );
-          //   }
-             
-             
-          });
-          
-        });
-                }
   });
-    //   $(".msg_head").click(function () {
-    //      $(this).next(".msg_body").slideToggle(600);
-    //      $(this).toggleClass("open");
-    // });
+    
             function successID(){
                 return true;
             }
