@@ -9,36 +9,63 @@ var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','st
 //       var SubMenuMenuName= unescape(temp[1]);
 //       alert(SubMenuMenuName);
 
-// .run(function($ionicPlatform, $cordovaSQLite) {
-//         $ionicPlatform.ready(function() {
+.run(function($ionicPlatform, $cordovaSQLite) {
+        $ionicPlatform.ready(function() {
         
 
-//         // Important!!
-//         // 
-//         // Instantiate database file/connection after ionic platform is ready.
-//         // 
-//         db = $cordovaSQLite.openDB("nextflow.db");
-//         $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
-//         .then(function(result) {
-//                 alert("table created successfully");
-//                   $scope.statusMessage = "Message saved successful, cheers!";
-//               }, function(error) {
-//                   $scope.statusMessage = "Error on saving: " + error.message;
-//               });
-//           // alert("inside a creation");
-//           $cordovaSQLite.execute(db, 'INSERT INTO Messages (message) VALUES (?)', "newMessage")
-//               .then(function(result) {
-//                 alert("insert successfully");
-//                   $scope.statusMessage = "Message saved successful, cheers!";
-//               }, function(error) {
-//                   $scope.statusMessage = "Error on saving: " + error.message;
-//               });
-
+        // Important!!
+        // 
+        // Instantiate database file/connection after ionic platform is ready.
+        // 
+        // db = $cordovaSQLite.openDB("nextflow.db");
+        // $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
+        // .then(function(result) {
+        //         alert("table created successfully");
+        //           $scope.statusMessage = "Message saved successful, cheers!";
+        //       }, function(error) {
+        //           $scope.statusMessage = "Error on saving: " + error.message;
+        //       });
+        //   // alert("inside a creation");
+        //   $cordovaSQLite.execute(db, 'INSERT INTO Messages (message) VALUES (?)', "newMessage")
+        //       .then(function(result) {
+        //         alert("insert successfully");
+        //           $scope.statusMessage = "Message saved successful, cheers!";
+        //       }, function(error) {
+        //           $scope.statusMessage = "Error on saving: " + error.message;
+        //       });
+ alert("itemLength");
+       var j=1;
+      var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+      
+                        db.transaction(function(tx){
+                              
+                              
+        tx.executeSql('CREATE TABLE IF NOT EXISTS submenu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER) ');
+        
+        for (var i = 0; i < 5; i++)
+        {
+            tx.executeSql('INSERT OR REPLACE INTO submenu (id,businessId)VALUES ("'+i+'","'+j+'")',successID);
+            j++;
+           
+        }
+        
+        
+        tx.executeSql('SELECT * FROM submenu',[], function (tx, results) {
+          var itemLength = results.rows.length;
+          
+          alert(itemLength);
+          alert(results.rows.item(0).businessId);
+  });
+    
+            function successID(){
+                return true;
+            }
+        });
               
-//         //alert(db);
+        //alert(db);
 
-//     });
-//   });
+    });
+  });
       
 // apps.run(function($ionicPlatform, $cordovaSQLite) {
 //         $ionicPlatform.ready(function() {
