@@ -66,6 +66,9 @@ angular.module('starter.toggleCtrl', [
 .controller('menu', function($scope,$http) {
 
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php').success(function(json){
+
+      $scope.Menus=json.rows;
+      
         var j=0;
          var businessId='1';
        var ajaxlength = json.rows.length;
@@ -84,9 +87,12 @@ angular.module('starter.toggleCtrl', [
         }
          tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
           var itemLength = results.rows.length;
-          $scope.Menus=results.rows;
+          //$scope.Menus=results.rows;
           alert(itemLength+"Length of the stored item");
-          alert(results.rows.item(0).name);
+          for (var i = 0; i < itemLength; i++)
+        {
+          alert(results.rows.item(0).id);
+        }
         });
     
             function successID(){
@@ -94,7 +100,7 @@ angular.module('starter.toggleCtrl', [
             }
         });
 
-    $scope.Menus=json.rows;
+    
     }).error(function(){
       alert("Server Error");
     });
