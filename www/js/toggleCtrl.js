@@ -80,6 +80,8 @@ angular.module('starter.toggleCtrl', [
            tx.executeSql('SELECT * FROM menu where status="ON" and businessId = "'+businessId+'" ',[], function (tx, results) {
             var itemLength = results.rows.length;
             var menudatas=results.rows;
+            alert(itemLength);
+              alert(results.rows.item(0).menuName);
             for(var i = 0; i < itemLength; i++) {
                 var row = menudatas.item(i);
                 var obj = {businessId: row.businessId,id:row.id,image:row.image,menuName:row.menuName,online:row.online,position:row.position,status:row.status,createdTime:row.createdTime};
