@@ -88,7 +88,7 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }  
           $scope.Menus=json_arr;
-          console.log( $scope.Menus);
+          //console.log( $scope.Menus);
           });
             function successID(){
                 return true;
@@ -110,7 +110,7 @@ angular.module('starter.toggleCtrl', [
                     json_arr.push(obj);
                 }  
               $scope.Menus=json_arr;
-              console.log( $scope.Menus);
+              //console.log( $scope.Menus);
               });
         });
      });
@@ -150,7 +150,7 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }  
           $scope.SubMenu=json_arr;
-          console.log( $scope.SubMenu);
+          //console.log( $scope.SubMenu);
           });
             function successID(){
                 return true;
@@ -159,7 +159,7 @@ angular.module('starter.toggleCtrl', [
 
 
     //$scope.SubMenu=data.rows;
-    console.log($scope.SubMenu);
+    //console.log($scope.SubMenu);
     }).error(function(){
        var json_arr =  [];  
         var businessId='1';
@@ -177,7 +177,7 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }  
           $scope.SubMenu=json_arr;
-          console.log( $scope.SubMenu);
+          //console.log( $scope.SubMenu);
           });
         });
     });
@@ -267,7 +267,7 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }
           $scope.SubMenuItem=json_arr;
-          console.log( $scope.SubMenuItem);
+          //console.log( $scope.SubMenuItem);
           });
             
             function successID(){
@@ -296,7 +296,7 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }  
           $scope.SubMenuItem=json_arr;
-          console.log( $scope.SubMenuItem);
+          //console.log( $scope.SubMenuItem);
           });
         });
     });
