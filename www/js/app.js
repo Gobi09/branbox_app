@@ -9,36 +9,36 @@ var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','st
 //       var SubMenuMenuName= unescape(temp[1]);
 //       alert(SubMenuMenuName);
 
-.run(function($ionicPlatform, $cordovaSQLite) {
-        $ionicPlatform.ready(function() {
+// .run(function($ionicPlatform, $cordovaSQLite) {
+//         $ionicPlatform.ready(function() {
         
 
-        // Important!!
-        // 
-        // Instantiate database file/connection after ionic platform is ready.
-        // 
-        db = $cordovaSQLite.openDB("nextflow.db");
-        $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
-        .then(function(result) {
-                alert("table created successfully");
-                  $scope.statusMessage = "Message saved successful, cheers!";
-              }, function(error) {
-                  $scope.statusMessage = "Error on saving: " + error.message;
-              });
-          // alert("inside a creation");
-          $cordovaSQLite.execute(db, 'INSERT INTO Messages (message) VALUES (?)', "newMessage")
-              .then(function(result) {
-                alert("insert successfully");
-                  $scope.statusMessage = "Message saved successful, cheers!";
-              }, function(error) {
-                  $scope.statusMessage = "Error on saving: " + error.message;
-              });
+//         // Important!!
+//         // 
+//         // Instantiate database file/connection after ionic platform is ready.
+//         // 
+//         db = $cordovaSQLite.openDB("nextflow.db");
+//         $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
+//         .then(function(result) {
+//                 alert("table created successfully");
+//                   $scope.statusMessage = "Message saved successful, cheers!";
+//               }, function(error) {
+//                   $scope.statusMessage = "Error on saving: " + error.message;
+//               });
+//           // alert("inside a creation");
+//           $cordovaSQLite.execute(db, 'INSERT INTO Messages (message) VALUES (?)', "newMessage")
+//               .then(function(result) {
+//                 alert("insert successfully");
+//                   $scope.statusMessage = "Message saved successful, cheers!";
+//               }, function(error) {
+//                   $scope.statusMessage = "Error on saving: " + error.message;
+//               });
 
               
-        alert(db);
+//         //alert(db);
 
-    });
-  });
+//     });
+//   });
       
 // apps.run(function($ionicPlatform, $cordovaSQLite) {
 //         $ionicPlatform.ready(function() {

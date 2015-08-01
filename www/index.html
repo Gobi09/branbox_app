@@ -114,11 +114,7 @@
     <script>
         $(document).ready(function(){
            
-      
-      var parameters = location.search.substring(1).split("&");
-      var temp = parameters[0].split("=");
-      var getMenuId= unescape(temp[1]);
-    
+       alert("itemLength");
             var businessId='1';
             //alert(businessId);
           
@@ -131,6 +127,7 @@
     data :  'businessId='+businessId,
                 success:function (json)
                 {
+                  alert("json reserved");
                   console.log(json);
                   alert(json.rows[i].menuId);
                     var ajaxlength = json.rows.length;
