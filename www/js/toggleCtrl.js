@@ -68,7 +68,7 @@ angular.module('starter.toggleCtrl', [
     $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php').success(function(json){
 
       $scope.Menus=json.rows;
-      
+
         var j=0;
          var businessId='1';
        var ajaxlength = json.rows.length;
@@ -91,7 +91,7 @@ angular.module('starter.toggleCtrl', [
           alert(itemLength+"Length of the stored item");
           for (var i = 0; i < itemLength; i++)
         {
-          alert(results.rows.item(0).id);
+          alert(results.rows.item(i).name);
         }
         });
     
