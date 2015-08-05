@@ -83,21 +83,29 @@
   <body ng-app="starter">
        
 <ion-pane ng-controller="indexpage">
-    <ion-header-bar class="bar-header bar-assertive">
+    <!-- <ion-header-bar class="bar-header bar-assertive"> -->
     <!-- <a class="button  icon-left ion-gear-a redColorBtn"></a> -->
     <!-- <div class="buttons buttons-left header-item">
       <span class="left-buttons">
       <button class="button button-icon button-clear ion-navicon" menu-toggle="left"> </button>
       </span>
     </div> -->
-    <div class="title"> <img src="img/logo.jpg" style="width:100px; hieght:43px;">
+<!--     <div class="title "> <img src="img/logo.jpg" class="text-center" style="width:100px; hieght:43px;">
         
     </div>
     <a class="button  icon-left ion-ios-cart redColorBtn" href="#/addToCart"  ></a>
     
-  </ion-header-bar>
+  </ion-header-bar> -->
 
-
+<ion-header-bar align-title="center" class="bar-assertive">
+  <div class="buttons">
+     <a class="button  icon-right ion-arrow-left-c redColorBtn" ng-click="doTheBack()"></a>
+  </div>
+  <h1 class="title"><img class="title-image" src="img/logo.jpg"  width="123" height="43" /></h1>
+  <div class="buttons">
+    <a class="button  icon-left ion-ios-cart redColorBtn" href="#/addToCart"  ></a>
+  </div>
+</ion-header-bar>
    
 
   <ion-nav-view>
@@ -108,7 +116,7 @@
       <div class="bar bar-footer bar-assertive">
        <a class="button  icon-right ion-home redColorBtn" href="#/mainMenu" ></a>
     <div class="title padding-top" id="logo"> </div>
-    <a class="button  icon-right ion-arrow-left-c redColorBtn" ng-click="doTheBack()"></a>
+    <a class="button  icon-right ion-gear-a redColorBtn" ng-click="doTheBack()"></a>
       </div>
     </ion-pane>
 
