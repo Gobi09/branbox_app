@@ -9,35 +9,99 @@ var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','st
 //       var SubMenuMenuName= unescape(temp[1]);
 //       alert(SubMenuMenuName);
 
-.run(function($ionicPlatform, $cordovaSQLite) {
-        $ionicPlatform.ready(function() {
-        
+.run(function($ionicPlatform, $cordovaSQLite,$http) {
+        //$ionicPlatform.ready(function() {
+         var businessId=1;
+           
+          //Menus from server and sync here.....
+          $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+            .success(function (json) {
+             
+              var ajaxlength = json.rows.length;
+              var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                 tx.executeSql('CREATE TABLE IF NOT EXISTS menu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER , menuName TEXT, image TEXT, position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+                  for (var i = 0; i < ajaxlength; i++)
+                  {
+                      tx.executeSql('INSERT OR REPLACE INTO menu (id, businessId, menuName,image, position, status , online, createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);             
+                  }
+                  function successID(){
+                      return true;
+                  }
+              });
+            }).error(function(){  
+                alert("server Error");
+             });
 
-        // Important!!
-        // 
-        // Instantiate database file/connection after ionic platform is ready.
-        // 
-        // db = $cordovaSQLite.openDB("nextflow.db");
-        // $cordovaSQLite.execute(db, 'CREATE TABLE IF NOT EXISTS Messages (id INTEGER PRIMARY KEY AUTOINCREMENT, message TEXT)')
-        // .then(function(result) {
-        //         alert("table created successfully");
-        //           $scope.statusMessage = "Message saved successful, cheers!";
-        //       }, function(error) {
-        //           $scope.statusMessage = "Error on saving: " + error.message;
-        //       });
-        //   // alert("inside a creation");
-        //   $cordovaSQLite.execute(db, 'INSERT INTO Messages (message) VALUES (?)', "newMessage")
-        //       .then(function(result) {
-        //         alert("insert successfully");
-        //           $scope.statusMessage = "Message saved successful, cheers!";
-        //       }, function(error) {
-        //           $scope.statusMessage = "Error on saving: " + error.message;
-        //       });
+            //sub Menu from server and sync here....
+            $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenuWithItem.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+            .success(function (json) {
+             
+              var ajaxlength = json.rows.length;
+              var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                 
+                  tx.executeSql('CREATE TABLE IF NOT EXISTS submenu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER ,menuId INTEGER,subMenuName TEXT, image TEXT,position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+                  for (var i = 0; i < ajaxlength; i++)
+                  {
+                      tx.executeSql('INSERT OR REPLACE INTO submenu (id,businessId,menuId,subMenuName,image,position,status,online,createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].menuId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
+                  }
+                  function successID(){
+                      return true;
+                  }
+
+              });
+            }).error(function(){  
+                alert("server Error");
+             });
+
+            //sub Menu Items from server and sync here....
+            $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxSubMenu.php',{bussId: businessId}, {headers: {'Content-Type': 'application/x-www-form-urlencoded'} })
+            .success(function (json) {
+             
+              var ajaxlength = json.rows.length;
+              var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              db.transaction(function(tx){
+                 
+                  tx.executeSql('CREATE TABLE IF NOT EXISTS item ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER ,menuId INTEGER, subMenuId INTEGER, itemName TEXT, image TEXT, price TEXT, garnish TEXT,tax TEXT,offers TEXT, position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+                  for (var i = 0; i < ajaxlength; i++)
+                  {
+                      tx.executeSql('INSERT OR REPLACE INTO item (id,businessId,menuId,subMenuId,itemName,image,price,garnish,tax,offers,position,status,online,createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].menuId+'","'+json.rows[i].subMenuId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].price+'","'+json.rows[i].garnish+'","'+json.rows[i].tax+'","'+json.rows[i].offers+'","'+json.rows[i].positions+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);
+                  }
+                  function successID(){
+                      return true;
+                  }
+
+              });
+            }).error(function(){  
+                alert("server Error");
+             });
+
 
               
-        //alert(db);
 
-    });
+              // $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php').success(function(json){
+              //     var json_arr =  [];  
+              //     var ajaxlength = json.rows.length;
+              //     var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+              //     db.transaction(function(tx){
+              //        tx.executeSql('CREATE TABLE IF NOT EXISTS menu ( id INTEGER PRIMARY KEY AUTOINCREMENT, businessId INTEGER , menuName TEXT, image TEXT, position TEXT, status TEXT, online TEXT, createdTime TEXT ) ');
+              //         for (var i = 0; i < ajaxlength; i++)
+              //         {
+              //             tx.executeSql('INSERT OR REPLACE INTO menu (id, businessId, menuName,image, position, status , online, createdTime)VALUES ("'+json.rows[i].id+'","'+json.rows[i].businessId+'","'+json.rows[i].name+'","'+json.rows[i].image+'","'+json.rows[i].position+'","'+json.rows[i].status+'","'+json.rows[i].online+'","'+json.rows[i].createdTime+'")',successID);             
+              //         }
+              //         function successID(){
+              //             return true;
+              //         }
+              //     });
+              //      alert("success");
+              // }).error(function(){  
+              //     alert("server Error");
+              //  });
+
+
+
+     //});
   });
       
 // apps.run(function($ionicPlatform, $cordovaSQLite) {
