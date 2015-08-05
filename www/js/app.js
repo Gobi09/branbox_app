@@ -78,7 +78,23 @@ var apps=angular.module('starter', ['ionic','ngCordova','starter.toggleCtrl','st
              });
 
 
-              
+               var db = window.openDatabase("branbox", "1.0", "branbox Demo", 200 * 1024 * 1024);
+               //db.execSQL("");
+              db.transaction(function(tx){
+                //tx.executeSql('DROP TABLE IF EXISTS ordertable');
+                tx.executeSql('DELETE FROM ordertable');
+                 tx.executeSql('CREATE TABLE IF NOT EXISTS ordertable (id INTEGER PRIMARY KEY AUTOINCREMENT,businessId INTEGER ,menuId INTEGER, subMenuId INTEGER,itemId INTEGER, itemName TEXT, image TEXT, subTotal TEXT, quantity TEXT, garnish TEXT,tax TEXT,offers TEXT)');
+                // tx.executeSql('INSERT OR REPLACE INTO ordertable (businessId,menuId,subMenuId,itemId,itemName,image,subTotal,quantity,garnish,tax,offers)VALUES ("23","34","6634","23","34","6634","23","34","6634","23","34")',successID);
+                 function successID(){
+                      return true;
+                  }
+
+
+                });
+
+
+
+
 
               // $http.post('http://www.appnlogic.com/branboxAppAdmin/branboxAdminUi/ajaxMenu.php').success(function(json){
               //     var json_arr =  [];  
