@@ -85,7 +85,8 @@ angular.module('starter.toggleCtrl', [
                     json_arr.push(obj);
                 }  
               $scope.Menus=json_arr;
-              console.log( $scope.Menus);
+               alert(itemLength);
+              //console.log( $scope.Menus);
               });
         });
     
@@ -114,8 +115,10 @@ angular.module('starter.toggleCtrl', [
                 var obj = {id:row.id,businessId: row.businessId,menuId:row.menuId,subMenuName:row.subMenuName,image:row.image,position:row.position,status:row.status,online:row.online,createdTime:row.createdTime};
                 json_arr.push(obj);
             }  
+
           $scope.SubMenu=json_arr;
-          console.log( $scope.SubMenu);
+          alert(itemLength);
+          //console.log( $scope.SubMenu);
           });
         });
    
@@ -194,7 +197,8 @@ angular.module('starter.toggleCtrl', [
                 json_arr.push(obj);
             }  
           $scope.SubMenuItem=json_arr;
-          console.log( $scope.SubMenuItem);
+           alert(itemLength);
+          //console.log( $scope.SubMenuItem);
           });
         });
    
